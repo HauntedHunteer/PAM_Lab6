@@ -7,6 +7,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.view.View;
 
@@ -21,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,24 +46,25 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.FirstFragment:
                 Snackbar.make(findViewById(android.R.id.content),
-                        "Settings works!", Snackbar.LENGTH_LONG)
+                        "Welcome in first fragment!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                return true;
+                return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
 
-            case R.id.action_about:
+            case R.id.SecondFragment:
                 Snackbar.make(findViewById(android.R.id.content),
-                        "About works!", Snackbar.LENGTH_LONG)
+                        "Welcome in second fragment!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                return true;
+                return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
 
-            case R.id.action_exit:
+            case R.id.ThirdFragment:
                 Snackbar.make(findViewById(android.R.id.content),
-                        "Exit works!", Snackbar.LENGTH_LONG)
+                        "Welcome in third fragment!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                return true;
+                return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
 
             default:
                 // If we got here, the user's action was not recognized.
